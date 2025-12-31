@@ -120,7 +120,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # This tells Django where to look for your CSS/JS during development
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] 
+# Replace your current STATICFILES_DIRS with this:
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] if os.path.exists(os.path.join(BASE_DIR, 'static')) else []
 
 # Change 'assets' to 'staticfiles' for better compatibility with Render/WhiteNoise
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
