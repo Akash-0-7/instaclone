@@ -16,7 +16,7 @@ class User(models.Model):
     email=models.CharField(max_length=20)
     phone=models.CharField(max_length=10)
     LOGIN=models.ForeignKey(Login,on_delete=models.CASCADE)
-    image=models.ImageField(upload_to='insta')
+    image=models.ImageField(upload_to='insta',max_length=255)
 
     def __str__(self):
         return self.firstname
