@@ -9,3 +9,4 @@ pip install -r requirements.txt
 # Run migrations
 python manage.py makemigrations myapp
 python manage.py migrate
+python manage.py createsuperuser --no-input || true
