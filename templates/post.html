@@ -1,0 +1,206 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram - Add Post</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #fafafa;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Navbar */
+    nav {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      z-index: 100;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-left i {
+      font-size: 26px;
+      color: #E1306C;
+    }
+
+    .nav-left h2 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .nav-right a {
+      margin-left: 20px;
+      font-weight: 500;
+      color: #333;
+      transition: color 0.2s;
+    }
+
+    .nav-right a:hover {
+      color: #E1306C;
+    }
+
+    /* Form Container */
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      border-radius: 15px;
+      padding: 25px 30px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+
+    .container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #E1306C;
+    }
+
+    form label {
+      display: block;
+      margin-top: 15px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    form input[type="text"],
+    form textarea,
+    form input[type="file"] {
+      width: 100%;
+      margin-top: 6px;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    form input:focus,
+    form textarea:focus {
+      border-color: #E1306C;
+      box-shadow: 0 0 0 2px rgba(225,48,108,0.15);
+    }
+
+    form textarea {
+      resize: vertical;
+      height: 100px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      background: #E1306C;
+      color: white;
+      border: none;
+      padding: 12px;
+      margin-top: 25px;
+      font-weight: 600;
+      font-size: 15px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    button[type="submit"]:hover {
+      background: #c4245c;
+      transform: scale(1.02);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+      color: #777;
+      background: #fff;
+      border-top: 1px solid #ddd;
+      margin-top: 50px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container {
+        margin: 20px 15px;
+        padding: 20px;
+      }
+
+      .nav-left h2 {
+        font-size: 18px;
+      }
+
+      .nav-right a {
+        margin-left: 10px;
+        font-size: 14px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-left">
+      <i class="fab fa-instagram"></i>
+      <h2>Puthiya<span style="color:deeppink;">Gram</span></h2>
+    </div>
+    <div class="nav-right">
+      <a href="#">Home</a>
+      <a href="userpostview">My Posts</a>
+      <a href="\">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Post Form -->
+  <div class="container">
+    <h2>Add New Post</h2>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="title">Post Title</label>
+      <input type="text" id="title" name="title" placeholder="Enter post title" required>
+
+      <label for="description">Description</label>
+      <textarea id="description" name="description" placeholder="Write your post description here..." required></textarea>
+
+      <label for="image">Upload Image</label>
+      <input type="file" id="image" name="image" accept="image/*" required>
+
+      <button type="submit">Upload Post</button>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Instagram | All Rights Reserved
+  </footer>
+</body>
+</html>

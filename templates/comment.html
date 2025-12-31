@@ -1,0 +1,215 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Instagram - Add Comment</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: #f5f5f7;
+      color: #222;
+      min-height: 100vh;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* Navbar */
+    nav {
+      position: sticky;
+      top: 0;
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 30px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+      z-index: 100;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-left i {
+      font-size: 26px;
+      color: #E1306C;
+    }
+
+    .nav-left h2 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+
+    .nav-right a {
+      margin-left: 20px;
+      font-weight: 500;
+      color: #333;
+      transition: color 0.2s;
+    }
+
+    .nav-right a:hover {
+      color: #E1306C;
+    }
+
+    /* Comment Form Container */
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+      padding: 30px 25px;
+    }
+
+    .container h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      font-weight: 600;
+      color: #E1306C;
+    }
+
+    form label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      color: #333;
+    }
+
+    form input[type="text"] {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    form input[type="text"]:focus {
+      border-color: #E1306C;
+      box-shadow: 0 0 0 2px rgba(225,48,108,0.15);
+    }
+
+    /* Button Container */
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 20px;
+      gap: 10px;
+    }
+
+    .view-btn, 
+    button[type="submit"] {
+      flex: 1;
+      text-align: center;
+      padding: 12px;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .view-btn {
+      background: #f0f0f0;
+      color: #333;
+      border: 1px solid #ccc;
+    }
+
+    .view-btn:hover {
+      background: #e2e2e2;
+    }
+
+    button[type="submit"] {
+      background: #E1306C;
+      color: #fff;
+      border: none;
+    }
+
+    button[type="submit"]:hover {
+      background: #c4245c;
+      transform: scale(1.02);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+      color: #777;
+      background: #fff;
+      border-top: 1px solid #ddd;
+      margin-top: 50px;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .container {
+        margin: 30px 15px;
+        padding: 20px;
+      }
+
+      .button-group {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-left">
+      <i class="fab fa-instagram"></i>
+      <h2>Insta<span style="color:deeppink;">gram</span></h2>
+    </div>
+    <div class="nav-right">
+      <a href="/home">Home</a>
+      <a href="\">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Comment Form -->
+  <div class="container">
+    
+    <h2>Add Comment</h2>
+    <form method="POST">
+      {% csrf_token %}
+      <label for="comment">Your Comment</label>
+      <input type="text" id="comment" name="comment" placeholder="Write your comment..." required>
+
+      <div class="button-group">
+        <a href="/commentview/{{post_id}}" class="view-btn">View All Comments</a>
+        <button type="submit">Post Comment</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Instagram | All Rights Reserved
+  </footer>
+
+</body>
+</html>

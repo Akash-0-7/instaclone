@@ -1,0 +1,197 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up • Model Portal</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f0f4f7, #d9e2ec);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .signup-container {
+      background: #fff;
+      border-radius: 20px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      width: 400px;
+      max-width: 90%;
+      padding: 45px 35px;
+      text-align: center;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .signup-container:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }
+
+    .logo {
+      font-size: 50px;
+      background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fd5949 50%, #d6249f 70%, #285AEB 90%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+    h2 {
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 30px;
+      font-size: 24px;
+      text-transform: capitalize;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      background: #f9f9fb;
+      font-size: 15px;
+      transition: all 0.25s ease-in-out;
+    }
+
+    .form-group input:focus {
+      border-color: #e1306c;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(225, 48, 108, 0.15);
+      outline: none;
+    }
+
+    .form-group input[type="file"] {
+      padding: 10px 14px;
+    }
+
+    .signup-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #e1306c, #c13584);
+      color: #fff;
+      border: none;
+      padding: 14px 0;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 16px;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .signup-btn:hover {
+      opacity: 0.95;
+      transform: scale(1.02);
+    }
+
+    .divider {
+      margin: 30px 0;
+      position: relative;
+      text-align: center;
+      color: #999;
+      font-size: 13px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: #ddd;
+    }
+
+    .divider::before { left: 0; }
+    .divider::after { right: 0; }
+
+    .login-link {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .login-link a {
+      color: #e1306c;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      margin-top: 25px;
+      font-size: 12px;
+      color: #aaa;
+    }
+
+    @media (max-width: 480px) {
+      .signup-container {
+        padding: 35px 25px;
+      }
+      h2 { font-size: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="signup-container">
+    <i class="fab fa-instagram logo"></i>
+    <h2>Create Account</h2>
+
+    <form method="POST" action="" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="form-group">
+        <input type="text" name="firstname" placeholder="First Name" required>
+      </div>
+      <div class="form-group">
+        <input type="text" name="lastname" placeholder="Last Name" required>
+      </div>
+      <div class="form-group">
+        <input type="email" name="email" placeholder="Email" required>
+      </div>
+      <div class="form-group">
+        <input type="text" name="username" placeholder="Username" required>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" placeholder="Password" required>
+      </div>
+      <div class="form-group">
+        <input type="file" name="image" placeholder="Upload Image" required>
+      </div>
+      <button type="submit" class="signup-btn">Sign Up</button>
+    </form>
+
+    <div class="divider">or</div>
+
+    <div class="login-link">
+      Already have an account? <a href="\">Log In</a>
+    </div>
+
+    <div class="footer">
+      © 2025 Model Portal
+    </div>
+  </div>
+</body>
+</html>

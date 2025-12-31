@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login • Model Portal</title>
+
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #f9f9fb, #eceef3);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .login-container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 380px;
+      padding: 40px 35px;
+      text-align: center;
+      transition: all 0.3s ease-in-out;
+    }
+
+    .login-container:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    }
+
+    .logo {
+      font-size: 45px;
+      color: #e1306c;
+      margin-bottom: 15px;
+    }
+
+    h2 {
+      font-weight: 600;
+      color: #222;
+      margin-bottom: 25px;
+      font-size: 22px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      text-align: left;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      background: #fafafa;
+      font-size: 15px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    .form-group input:focus {
+      border-color: #e1306c;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(225, 48, 108, 0.15);
+      outline: none;
+    }
+
+    .login-btn {
+      width: 100%;
+      background: linear-gradient(135deg, #e1306c, #c13584);
+      color: #fff;
+      border: none;
+      padding: 12px 0;
+      border-radius: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 15px;
+      margin-top: 10px;
+      transition: all 0.3s ease;
+    }
+
+    .login-btn:hover {
+      opacity: 0.9;
+      transform: scale(1.02);
+    }
+
+    .divider {
+      margin: 25px 0;
+      position: relative;
+      text-align: center;
+      color: #999;
+      font-size: 13px;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 40%;
+      height: 1px;
+      background: #ddd;
+    }
+
+    .divider::before {
+      left: 0;
+    }
+
+    .divider::after {
+      right: 0;
+    }
+
+    .login-link {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .login-link a {
+      color: #e1306c;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <i class="fab fa-instagram logo"></i>
+    <h2>Login</h2>
+
+    <form method="POST" action="">
+      {% csrf_token %}
+      <div class="form-group">
+        <input type="text" name="username" placeholder="Enter username" required>
+      </div>
+      <div class="form-group">
+        <input type="password" name="password" placeholder="Enter password" required>
+      </div>
+      <button type="submit" class="login-btn">Log In</button>
+    </form>
+
+    <div class="divider">or</div>
+
+    <div class="login-link">
+      Don’t have an account? <a href="signup">Sign up</a>
+    </div>
+
+    <div class="footer">
+      © 2025 Model Portal
+    </div>
+  </div>
+</body>
+</html>

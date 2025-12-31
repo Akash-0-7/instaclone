@@ -1,0 +1,238 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ profile_user.firstname }} - Profile</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #121212;
+      color: #f5f5f5;
+    }
+
+    /* Navbar */
+    nav {
+      background: #1e1e1e;
+      border-bottom: 1px solid #333;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 24px;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-left i { font-size: 28px; }
+    .nav-left h2 { font-size: 22px; font-weight: 600; }
+
+    .nav-right { display: flex; gap: 20px; }
+    .nav-icon { color: #fff; font-size: 22px; transition: 0.2s; }
+    .nav-icon:hover { color: #dc2743; }
+
+    /* Profile Header */
+    .profile-header {
+      text-align: center;
+      margin: 40px 0 20px;
+    }
+
+    .profile-header img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #dc2743;
+      background-color: #222;
+    }
+
+    .profile-header h2 {
+      margin-top: 10px;
+      font-size: 22px;
+      color: #fff;
+    }
+
+    /* Follow Info */
+    .follow-info {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin: 10px 0;
+      color: #aaa;
+    }
+
+    .follow-btn {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 500;
+      text-decoration: none;
+      color: white;
+      background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+      transition: 0.2s;
+    }
+
+    .follow-btn.unfollow {
+      background: transparent;
+      border: 1px solid #dc2743;
+      color: #dc2743;
+    }
+
+    .follow-btn:hover {
+      opacity: 0.9;
+    }
+
+    .message-btn {
+      background: #0077ff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: 500;
+      color: white;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+
+    .message-btn:hover {
+      background: #005bb5;
+    }
+
+    /* Posts - Vertical Layout */
+    .post-gallery {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 0 20px 40px;
+      max-width: 600px;
+      margin: auto;
+    }
+
+    .post-card {
+      background-color: #1e1e1e;
+      border-radius: 10px;
+      border: 1px solid #333;
+      overflow: hidden;
+    }
+
+    .post-card img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      background-color: #222;
+      display: block;
+    }
+
+    .post-card p {
+      padding: 8px 10px;
+      font-size: 14px;
+      color: #bbb;
+      text-align: center;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      color: #777;
+      padding: 20px 0;
+      border-top: 1px solid #333;
+      background: #1e1e1e;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .profile-header img {
+        width: 100px;
+        height: 100px;
+      }
+
+      .post-gallery {
+        padding: 0 10px 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-left">
+      <i class="fab fa-instagram"></i>
+      <h2>Instagram</h2>
+    </div>
+    <div class="nav-right">
+      <a href="{% url 'home' %}" class="nav-icon"><i class="fa-solid fa-house"></i></a>
+      <a href="{% url 'notification' %}" class="nav-icon"><i class="fa-regular fa-bell"></i></a>
+    </div>
+  </nav>
+
+  <!-- Profile Header -->
+  <div class="profile-header">
+    {% if profile_user.image %}
+      <img src="{{ profile_user.image.url }}" alt="{{ profile_user.firstname }}">
+    {% else %}
+      <img src="{% static 'img/admin-icon.png' %}" alt="Default Profile">
+    {% endif %}
+
+    <h2>{{ profile_user.firstname }} {{ profile_user.lastname }}</h2>
+
+    <div class="follow-info">
+      <span><strong>{{ followers_count }}</strong> Followers</span>
+      <span><strong>{{ following_count }}</strong> Following</span>
+    </div>
+
+    {% if request.session.user_id != profile_user.id %}
+      <div style="display:flex; justify-content:center; gap:10px; margin-top:10px;">
+        {% if is_following %}
+          <a href="{% url 'unfollow' profile_user.id %}" class="follow-btn unfollow">Unfollow</a>
+        {% else %}
+          <a href="{% url 'follow' profile_user.id %}" class="follow-btn">Follow</a>
+        {% endif %}
+        <a href="{% url 'message_user' profile_user.id %}" class="message-btn">
+          <i class="fa-solid fa-paper-plane"></i> Message
+        </a>
+      </div>
+    {% endif %}
+  </div>
+
+  <!-- Posts -->
+  <div class="post-gallery">
+    {% for post in posts %}
+      <div class="post-card">
+        {% if post.image %}
+          <img src="{{ post.image.url }}" alt="Post image">
+        {% else %}
+          <img src="{% static 'img/no-image.png' %}" alt="No image">
+        {% endif %}
+        <p>{{ post.title|default:"Untitled" }}</p>
+      </div>
+    {% empty %}
+      <p style="text-align:center; color:#aaa;">No posts yet.</p>
+    {% endfor %}
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    © 2025 Instagram Clone. All rights reserved.
+  </footer>
+
+</body>
+</html>
+
+
+
+
+
